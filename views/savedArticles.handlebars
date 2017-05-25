@@ -1,0 +1,44 @@
+
+<div class="main-container container">
+    {{#each savedArticles}}
+        <div class="panel article">
+            <div class="panel-header">
+                <a href="{{link}}"> {{title}} </a>
+            </div>
+            <div class="note-div panel-body">
+                <div class="note-btn col-sm-3">
+                    <form action="/note" method="GET" >
+                        <input hidden name="link" value="{{link}}">
+                        <input hidden name="title" value="{{title}}">
+                        <input type="submit" value="Article Note" class="btn btn-primary">
+                    </form>
+                </div>
+
+                <div class="note-btn col-sm-3">
+                    <form action="/savingNote" method="POST" class="row">
+                        <input hidden name="articleId" value="{{_id}}">
+                        <input type="text" name="text" class="col-sm-5">
+                        <input type="submit" value="Save Note" class="btn btn-primary offset-col-sm-1 col-sm-6">
+                    </form>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+
+
+
+ {{!--
+<form action="/addcomment" method="POST">--}}
+    <!-- The Modal -->
+    {{!--
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+            <textarea name="commentText" id="commentText" cols="30" rows="10"></textarea>
+        </div>
+
+    </div>--}}
