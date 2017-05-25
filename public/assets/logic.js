@@ -17,16 +17,14 @@ $(".main-container").on("click", ".note-btn" , function(){
 	var thisModal = $("#modal_"+currentArticleId);
 	console.log(thisModal);
 	thisModal.addClass("modal-display");
-	var thisSpan = thisModal.children("span");
+	var thisSpan = $("#modalspan_" + currentArticleId);
+	console.log(thisSpan);
 	thisSpan.on("click", function(){
 		thisModal.removeClass("modal-display");
 	});
-	window.onclick = function (event) {
-		if (event.target == thisModal) {
-			thisModal.removeClass("modal-display");
-			// thisModal.addClass("modal-close");
-		}
-	}
+	// $('window').on("click", function (event) {
+	// 	thisModal.removeClass("modal-display");
+	// });
 })
 
 

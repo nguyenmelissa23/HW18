@@ -63,14 +63,17 @@ app.post("/savingArticle", function(req, res){
 	var newArticle = new Article(req.body);
 	newArticle.save(function(error, saved){
 		if(error) console.log(error);
-		else{
-			res.send(saved);
-		}
+		Article.on("index", function (err) {
+			if (err) {
+				console.log(err);
+			}
+		});
+		res.redirect("/savedArticles");
 	});
 });
 
 app.get("/savedArticles", function (req, res) {
-	Article.find({}, function (error, articles) {
+	Article.find({}).populate("notes").exec( function (error, articles) {
 		if (error) console.log(Error);
 		else {
 			console.log(articles);

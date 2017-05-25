@@ -10,9 +10,10 @@
                 {{!--the Modal--}}
                 <div class="col-sm-3 modal modal-display" id="modal_{{_id}}">
                     <form action="/savingNote" method="POST" class="row modal-content">
-                        <span class="close">&times;</span>
+                        <span id="modalspan_{{_id}}" class="close">&times;</span>
                         <input hidden name="articleId" value="{{_id}}">
-                        <p>Note for article: {{title}}</p>
+                        <p>Note for article:</p><h3>{{title}}</h3>
+                        <div class="savedNote"></div>
                         <input type="text" name="text" class="col-sm-5">
                         <input type="submit" value="Save Note" class="btn btn-primary offset-col-sm-1 col-sm-6">
                     </form>
