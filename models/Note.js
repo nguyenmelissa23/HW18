@@ -18,10 +18,6 @@ var NoteSchema = new Schema({
 
 var Note = mongoose.model("Note", NoteSchema);
 
-//Uniqueness only trigger on index.
-Note.on("index", function (err) {
-    if (err) console.log(err);
-    
-});
+
 
 module.exports = Note;

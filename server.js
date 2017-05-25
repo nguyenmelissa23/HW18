@@ -21,7 +21,7 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(express.static("public"));
-
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
@@ -61,53 +61,68 @@ app.post("/savingArticle", function(req, res){
 	// var newArticle = new Article(obj); 
 	console.log(req.body);
 	var newArticle = new Article(req.body);
+	Article.on("index", function (err) {
+		if (err) console.log(err);
+	});
 	newArticle.save(function(error, saved){
 		if(error) console.log(error);
-		Article.on("index", function (err) {
-			if (err) {
-				console.log(err);
-			}
-		});
-		res.redirect("/savedArticles");
+		res.redirect("/scrape");
 	});
 });
 
+//TODO: Displau the saved notes 
 app.get("/savedArticles", function (req, res) {
-	Article.find({}).populate("notes").exec( function (error, articles) {
-		if (error) console.log(Error);
-		else {
-			console.log(articles);
-			res.render("savedArticles", {savedArticles: articles});
-		}
+	// Article.find({}).populate("notes").exec(function (error, notes) {
+	// 	if (error) console.log(error);
+	// 	else {
+	// 		res.send(notes);
+	// 	}
+	// });
+	// Article.find({}, function (error, articles) {
+	// 	if (error) console.log(error);
+	// 	else {
+	// 		console.log("articles", articles);
+	// 		for (var i = 0; i < articles.length; i++){
+	// 			var articleId = articles[i]._id;
+	Article
+	.find({})
+	.populate("notes")
+	.exec(function (error, articles) {
+		if (error) console.log(error);
+		// else res.send(articles);
+		console.log("articles", articles);
+		res.render("savedArticles", { savedArticles: articles });
 	});
 });
 
 // Notes
 app.post("/savingNote", function(req, res){
 	var newNote = new Note({"text" : req.body.text});
+	Note.on("index", function (err) {
+		if (err) console.log(err);
+	});
 	newNote.save(function(error, savedNote){
 		if (error) console.log(error);
-		else {
-			console.log("articleId: ", req.body.articleId);
-			Article.findOneAndUpdate({"_id": req.body.articleId}, {$push:{"notes": savedNote._id}}, {new:true},
-				function(error, newSavedNote){
-					if (error) res.send("in article error",error);
-					else res.send(newSavedNote);
-				});
+		if (savedNote != undefined){
+			Article.findOneAndUpdate({ "_id": req.body.articleId }, { $push: { "notes": savedNote} }, { new: true },
+			function (error, newSavedNote) {
+				if (error) console.log(error);
+			});
 		}
 	});
+	res.redirect("/savedArticles");
 });
 
-app.get("/note", function (req, res) {
-	Note.find({}, function(error, notes){
-		if (error) console.log(error);
-		if (!notes){
-			res.send("There is no note.");
-		} else {
-			res.send(notes);
-		}
-	})
-});
+// app.get("/note", function (req, res) {
+// 	Note.find({}, function(error, notes){
+// 		if (error) console.log(error);
+// 		if (!notes){
+// 			res.render("savedArticles",{savedNote: "There is no note."});
+// 		} else {
+// 			res.render("savedArticles", {savedNotes: notes});
+// 		}
+// 	})
+// });
 
 // Scrape New Articles
 app.get("/scrape", function(req, res){

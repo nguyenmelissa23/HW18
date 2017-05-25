@@ -1,7 +1,9 @@
 /**
  * AJAX calls 
  */
+//  $.get("/notes", function(data){
 
+// });
 /**
  * End of AJAX call 
  */

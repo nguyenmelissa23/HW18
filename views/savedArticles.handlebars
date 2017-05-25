@@ -13,7 +13,11 @@
                         <span id="modalspan_{{_id}}" class="close">&times;</span>
                         <input hidden name="articleId" value="{{_id}}">
                         <p>Note for article:</p><h3>{{title}}</h3>
-                        <div class="savedNote"></div>
+                        <div class="savedNote">
+                            {{#each notes}}
+                            <p>{{text}}</p>
+                            {{/each}}
+                        </div>
                         <input type="text" name="text" class="col-sm-5">
                         <input type="submit" value="Save Note" class="btn btn-primary offset-col-sm-1 col-sm-6">
                     </form>
