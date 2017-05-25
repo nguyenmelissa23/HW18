@@ -86,7 +86,7 @@ app.post("/savingNote", function(req, res){
 		if (error) console.log(error);
 		else {
 			console.log("articleId: ", req.body.articleId);
-			Article.findOneAndUpdate({"_id": req.body.articleId}, {$push:{"notes": savedNote._id}}, {new:false},
+			Article.findOneAndUpdate({"_id": req.body.articleId}, {$push:{"notes": savedNote._id}}, {new:true},
 				function(error, newSavedNote){
 					if (error) res.send("in article error",error);
 					else res.send(newSavedNote);
