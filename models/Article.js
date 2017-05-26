@@ -16,10 +16,10 @@ var ArticleSchema = new Schema({
         required: [true, "No link found"],
     }, 
 
-    notes: {
+    notes: [{
         type: Schema.Types.ObjectId, 
         ref: "Note"
-    }
+    }]
 });
 
 var Article = mongoose.model("Article", ArticleSchema);
