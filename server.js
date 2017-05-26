@@ -77,18 +77,6 @@ app.post("/savingArticle", function(req, res){
 
 //TODO: Displau the saved notes 
 app.get("/savedArticles", function (req, res) {
-	// Article.find({}).populate("notes").exec(function (error, notes) {
-	// 	if (error) console.log(error);
-	// 	else {
-	// 		res.send(notes);
-	// 	}
-	// });
-	// Article.find({}, function (error, articles) {
-	// 	if (error) console.log(error);
-	// 	else {
-	// 		console.log("articles", articles);
-	// 		for (var i = 0; i < articles.length; i++){
-	// 			var articleId = articles[i]._id;
 	Article
 	.find({})
 	.populate("notes")
@@ -118,17 +106,6 @@ app.post("/savingNote", function(req, res){
 	res.redirect("/savedArticles");
 });
 
-// app.get("/note", function (req, res) {
-// 	Note.find({}, function(error, notes){
-// 		if (error) console.log(error);
-// 		if (!notes){
-// 			res.render("savedArticles",{savedNote: "There is no note."});
-// 		} else {
-// 			res.render("savedArticles", {savedNotes: notes});
-// 		}
-// 	})
-// });
-
 // Scrape New Articles
 app.get("/scrape", function(req, res){
 	var articleArr = [];
@@ -150,7 +127,7 @@ app.get("/scrape", function(req, res){
 				articleArr.push(newArticle);
 			}
 		});
-		res.render("home", {scrapedArticles: articleArr});
+		res.render("scrape", {scrapedArticles: articleArr});
 	});
 });
 
