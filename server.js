@@ -28,6 +28,8 @@ app.use(bodyParser.urlencoded({
 
 var PORT = process.env.PORT || 3000;
 app.set('port', PORT );
+
+
 // Databse config with mongoose:
 mongoose.connect("mongodb://heroku_zjc6crhg:686evpue33npdj1f9b1kbnd0rk@ds119091.mlab.com:19091/heroku_zjc6crhg")
 var db = mongoose.connection;
