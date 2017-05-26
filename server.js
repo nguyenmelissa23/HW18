@@ -27,19 +27,19 @@ app.use(bodyParser.urlencoded({
 }));
 
 
-// Databse config with mongoose:
-mongoose.connect("mongodb://heroku_zjc6crhg:686evpue33npdj1f9b1kbnd0rk@ds119091.mlab.com:19091/heroku_zjc6crhg")
-var db = mongoose.connection;
+// // Databse config with mongoose:
+// mongoose.connect("mongodb://heroku_zjc6crhg:686evpue33npdj1f9b1kbnd0rk@ds119091.mlab.com:19091/heroku_zjc6crhg")
+// var db = mongoose.connection;
 
-// Show err: 
-db.on("error", function(error){
-	console.log("Mongoose Error:", error);
-});
+// // Show err: 
+// db.on("error", function(error){
+// 	console.log("Mongoose Error:", error);
+// });
 
-// Once logged in, log message:
-db.once("open", function(){
-	console.log("Mongoose connection successful.");
-})
+// // Once logged in, log message:
+// db.once("open", function(){
+// 	console.log("Mongoose connection successful.");
+// })
 
 
 /**----------------------------------------------------------------
