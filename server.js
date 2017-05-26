@@ -48,7 +48,9 @@ db.once("open", function(){
  */
 // Main route
 app.get("/", function(req,res){
+	console.log("app.get(/)");
 	res.render("home", {});
+	console.log("app.get() after");
 });
 
 //Articles
@@ -157,5 +159,5 @@ app.get("/scrape", function(req, res){
 
 //Listening on port:
 app.listen(3000, function(){
-	console.log("App running: http://localhost:3000");
+	console.log("App running on PORT 3000");
 });
